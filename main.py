@@ -41,7 +41,7 @@ def validate_input():
             password_error = 'Must be between 3 and 20 characters'
         elif len(password) not in range(3, 21) or " " in password:
             password_error = 'Must be 3 and 21 characters long with no spaces'
-        elif password != verify_password:
+        elif verify_password != password:
             verify_error = 'passwords must match'
         if not email_error and not username_error and not password_error and not verify_error:
             return render_template('welcome.html', username=username)
@@ -49,6 +49,7 @@ def validate_input():
             return render_template('input.html',
         username_error=username_error,
         password_error=password_error,
+        verify_error=verify_error,
         email_error=email_error,
         username=username,
         password=password, email=email)
